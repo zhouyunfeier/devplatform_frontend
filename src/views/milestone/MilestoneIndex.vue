@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import MilestoneItem from '@/components/MilestoneItem.vue'
+import MilestoneItem from '@/components/milestone/MilestoneItem.vue'
 import MilestoneCreate from '@/views/milestone/MilestoneCreate.vue'
 import qs from 'qs'
 export default {

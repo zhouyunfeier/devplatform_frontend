@@ -55,7 +55,7 @@
   </a-layout>
 </template>
 <script>
-import NavMenu from "../components/NavMenu.vue"
+import NavMenu from "@/components/navmenu/NavMenu.vue"
 export default {
   data() {
     return {

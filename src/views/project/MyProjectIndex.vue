@@ -54,7 +54,7 @@
 </div>
 </template>
 <script>
-import ItemHeader from '@/components/ItemHeader.vue'
+import ItemHeader from '@/components/project/ItemHeader.vue'
 import MyProjectItem from '@/components/project/MyProjectItem.vue'
 import qs from 'qs'
 

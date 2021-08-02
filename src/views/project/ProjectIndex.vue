@@ -20,8 +20,8 @@
 </template>
 
 <script>
-import ItemHeader from '@/components/ItemHeader.vue'
-import ProjectItem from '@/components/ProjectItem.vue'
+import ItemHeader from '@/components/project/ItemHeader.vue'
+import ProjectItem from '@/components/project/ProjectItem.vue'
 import qs from 'qs'
 
 export default {

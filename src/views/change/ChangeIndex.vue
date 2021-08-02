@@ -1,6 +1,6 @@
 <template>
-    <div class="InfoSider_box">
-        侧边栏
+    <div>
+        这是变更历史的首页面
     </div>
 </template>
 
@@ -11,8 +11,5 @@
 </script>
 
 <style scoped>
-.InfoSider_box{
-    
-}
 
 </style>

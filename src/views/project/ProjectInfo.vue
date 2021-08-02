@@ -4,7 +4,7 @@
         <el-tab-pane label="项目详情" name="first">
             <div class="info_box">
                 <div class="info_center">
-                    <InfoCenter></InfoCenter></InfoCenter>
+                    <InfoCenter></InfoCenter>
                 </div>
                 <div class="info_right">
                     <div class="info_right_title">项目名</div>
@@ -37,7 +37,7 @@
 
 <script>
 import InfoCenter from '@/views/project/projectinfo/InfoCenter.vue'
-import TeamMemberItem from '@/components/project/TeamMemberItem.vue'
+import TeamMemberItem from '@/components/projectinfo/TeamMemberItem.vue'
 import qs from 'qs'
     export default {
         data() {
