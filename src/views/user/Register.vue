@@ -27,7 +27,7 @@
         <div class="register_button">
         <el-form-item>
           <el-button type="primary" @click="submitForm('user')">提交</el-button>
-          <el-button @click="resetForm('user')">重置</el-button>
+          <el-button @click="back()">返回</el-button>
         </el-form-item>
         </div>
         </el-form>
@@ -156,11 +156,8 @@
                     console.log(error);
                 });        
       },
-      resetForm(user) {
-        this.user.username = '';
-        this.user.password = '';
-        this.user.checkPass = '';
-        this.user.email = '';
+      back(){
+        this.$router.push('/login');
       }
     }
   }

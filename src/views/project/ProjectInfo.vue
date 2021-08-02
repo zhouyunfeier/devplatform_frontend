@@ -12,7 +12,9 @@
                     <div class="info_right_description">项目描述</div>
                     <div class="description_info">{{project.description}}</div>
                     <div class="info_right_team">团队成员</div>
-                    <div class="team_info">我在这里呢</div>
+                    <div class="team_info">
+                        <TeamMemberItem v-for="(member, index) in members" :key="index" :member="member"></TeamMemberItem>
+                    </div>
                 </div>
             </div>
         </el-tab-pane> 
@@ -35,6 +37,8 @@
 
 <script>
 import InfoCenter from '@/views/project/projectinfo/InfoCenter.vue'
+import TeamMemberItem from '@/components/project/TeamMemberItem.vue'
+import qs from 'qs'
     export default {
         data() {
             return {
@@ -44,10 +48,11 @@ import InfoCenter from '@/views/project/projectinfo/InfoCenter.vue'
                     description:"描述用力一个项目,测试一下如果标题太长了会自己换行的一个项目,测试一下如果标题太长了会自己换行的1",
                     remarks:"备注信息"
                 },
+                members:[]
             }
         },
 
-        components:{InfoCenter},
+        components:{InfoCenter,TeamMemberItem},
 
         methods: {
             handleClick(){
@@ -80,7 +85,17 @@ import InfoCenter from '@/views/project/projectinfo/InfoCenter.vue'
                 }  
             },
         },
-        
+
+        created() {
+            var _this = this;
+            this.axios.post('/index/projectinfo',qs.stringify({
+                projectid:this.$route.query.projectid,
+            })).then(function(response){
+                if(response.data.code == 200){
+                    _this.members = response.data.data;
+                }
+            })
+        },
     }
 </script>
 
