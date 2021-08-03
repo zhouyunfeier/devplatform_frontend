@@ -52,7 +52,8 @@
                 this.$router.push({
                     path:'/index/projectinfo',
                     query:{
-                        projectid:this.project.projectid
+                        founder:this.project.founder,
+                        project:this.project.name
                     }
                 })
             },

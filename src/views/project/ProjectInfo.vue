@@ -4,7 +4,7 @@
         <el-tab-pane label="项目详情" name="first">
             <div class="info_box">
                 <div class="info_center">
-                    <InfoCenter></InfoCenter>
+                    <InfoCenter :dirs="dirs" :files="files"></InfoCenter>
                 </div>
                 <div class="info_right">
                     <div class="info_right_title">项目名</div>
@@ -48,7 +48,9 @@ import qs from 'qs'
                     description:"描述用力一个项目,测试一下如果标题太长了会自己换行的一个项目,测试一下如果标题太长了会自己换行的1",
                     remarks:"备注信息"
                 },
-                members:[]
+                members:"",
+                dirs:"",
+                files:""
             }
         },
 
@@ -89,10 +91,16 @@ import qs from 'qs'
         created() {
             var _this = this;
             this.axios.post('/index/projectinfo',qs.stringify({
-                projectid:this.$route.query.projectid,
+                project:this.$route.query.project,
+                founder:this.$route.query.founder
             })).then(function(response){
+                console.log(response.data);
                 if(response.data.code == 200){
-                    _this.members = response.data.data;
+                    _this.members = response.data.data.member_list;
+                    _this.dirs = response.data.data.dir_list;
+                    _this.files = response.data.data.file_list;
+                    console.log()
+                    console.log(_this.dirs);
                 }
             })
         },
@@ -101,16 +109,16 @@ import qs from 'qs'
 
 <style scoped>
 .info_center{
-    height: 500px;
+    height: 1000px;
     width: 70%;
     display: inline-block;
-    min-width: 500px;
+    min-width: 700px;
     float: left;
 }
 
 .info_right{
     display: inline-block;
-    height: 500px;
+    height: 1000px;
     width: 30%;
     min-width: 200px;
     text-align: left;
