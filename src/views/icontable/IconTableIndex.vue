@@ -33,7 +33,8 @@ export default {
                 this.$router.push({
                     path:'/index/projectinfo',
                     query:{
-                        projectid:this.$route.query.projectid,
+                        founder:this.$route.query.founder,
+                        project:this.$route.query.project,
                     }
                 })
             }
@@ -41,7 +42,8 @@ export default {
                 this.$router.push({
                     path:'/index/requirement',
                     query:{
-                        projectid:this.$route.query.projectid,
+                        founder:this.$route.query.founder,
+                        project:this.$route.query.project,
                     }
                 }) 
 
@@ -50,7 +52,8 @@ export default {
                 this.$router.push({
                     path:'/index/milestone',
                     query:{
-                        projectid:this.$route.query.projectid,
+                        founder:this.$route.query.founder,
+                        project:this.$route.query.project,
                     }
                 })
             }

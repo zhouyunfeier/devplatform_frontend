@@ -161,7 +161,8 @@ import qs from 'qs'
       addMember(){
         var _this = this;
         this.axios.post("/index/sendemail",{
-          projectid:this.selectprojectid,
+          founder:this.$router.query.founder,
+          project:this.$router.query.project,
           email:this.email,
         }).then(function(response){
           if(response.data.code == 200){

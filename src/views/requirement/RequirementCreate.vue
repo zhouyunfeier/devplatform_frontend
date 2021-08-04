@@ -22,9 +22,10 @@ import qs from 'qs'
     export default {
         data() {
             return {
+                project_founder:this.$route.query.founder,
+                project:this.$route.query.project,
                 requirement:{
                     title:'',
-                    projectid:this.$route.query.projectid,
                     createDate:'',
                     updateDate:'',
                     founder:this.$store.getters.getUsername,
@@ -98,15 +99,16 @@ import qs from 'qs'
                 var _this = this;
                 var requirementhtml = this.$refs.md.d_render;
                 var requirementtext = this.$refs.md.d_value;
-                this.axios.post("/index/saverequirement",{
+                this.axios.post("/index/saverequirement",qs.stringify({
                     'title':this.requirement.title,
-                    'projectid':this.requirement.projectid,
                     'founder':this.requirement.founder,
                     'createDate':this.requirement.createDate,
                     'updateDate':this.requirement.updateDate,
                     'requirementhtml':requirementhtml,
                     'requirementtext':requirementtext,
-                }).then(function(response){
+                    'project_founder':this.$route.query.founder,
+                    'project':this.$route.query.project,
+                })).then(function(response){
                     if(response.data.code == 200){
                          console.log(response)
                         _this.$emit('ChangeRequirements',response.data.data.list);

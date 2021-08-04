@@ -4,7 +4,7 @@
         <el-tab-pane label="项目详情" name="first">
             <div class="info_box">
                 <div class="info_center">
-                    <InfoCenter :dirs="dirs" :files="files"></InfoCenter>
+                    <InfoCenter :dirs="dirs" :files="files"  :readme="readme"></InfoCenter>
                 </div>
                 <div class="info_right">
                     <div class="info_right_title">项目名</div>
@@ -50,7 +50,8 @@ import qs from 'qs'
                 },
                 members:"",
                 dirs:"",
-                files:""
+                files:"",
+                readme:""
             }
         },
 
@@ -65,7 +66,8 @@ import qs from 'qs'
                     this.$router.push({
                         path:'/index/requirement',
                         query:{
-                            projectid:this.$route.query.projectid,
+                            founder:this.$route.query.founder,
+                            project:this.$route.query.project,
                         }
                     })
                 }
@@ -73,7 +75,8 @@ import qs from 'qs'
                     this.$router.push({
                         path:'/index/milestone',
                         query:{
-                            projectid:this.$route.query.projectid,
+                            founder:this.$route.query.founder,
+                            project:this.$route.query.project,
                         }
                     }) 
                 }
@@ -81,7 +84,8 @@ import qs from 'qs'
                     this.$router.push({
                         path:'/index/icontable',
                         query:{
-                            projectid:this.$route.query.projectid,
+                            founder:this.$route.query.founder,
+                            project:this.$route.query.project,
                         }
                 })
                 }  
@@ -99,8 +103,8 @@ import qs from 'qs'
                     _this.members = response.data.data.member_list;
                     _this.dirs = response.data.data.dir_list;
                     _this.files = response.data.data.file_list;
-                    console.log()
-                    console.log(_this.dirs);
+                    _this.readme = response.data.data.readme;
+                    console.log(_this.readme);
                 }
             })
         },

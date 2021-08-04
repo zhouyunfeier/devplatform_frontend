@@ -94,7 +94,8 @@ export default {
                 this.$router.push({
                     path:'/index/projectinfo',
                     query:{
-                        projectid:this.$route.query.projectid,
+                        founder:this.$route.query.founder,
+                        project:this.$route.query.project,
                     }
                 })
             }
@@ -102,7 +103,8 @@ export default {
                 this.$router.push({
                     path:'/index/requirement',
                     query:{
-                        projectid:this.$route.query.projectid,
+                        founder:this.$route.query.founder,
+                        project:this.$route.query.project,
                     }
                 }) 
 
@@ -114,7 +116,8 @@ export default {
                 this.$router.push({
                     path:'/index/icontable',
                     query:{
-                        projectid:this.$route.query.projectid,
+                        founder:this.$route.query.founder,
+                        project:this.$route.query.project,
                     }
                 })
             }  
@@ -133,7 +136,8 @@ export default {
     created() {
         var _this = this;
       this.axios.post("/index/milestone",qs.stringify({
-          projectid:this.$route.query.projectid
+            founder:this.$route.query.founder,
+            project:this.$route.query.project,
       })).then(function(response) {
           if(response.data.code == 200){
               if(response.data.msg == "操作成功"){

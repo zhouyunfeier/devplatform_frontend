@@ -138,7 +138,8 @@ import qs from 'qs'
         created() {
             var _this = this;
             this.axios.post("/index/getmembers",qs.stringify({
-                projectid:this.$route.query.projectid
+                founder:this.$router.query.founder,
+                project:this.$router.query.project,
             })).then(function(response){
                 console.log(response);
                 if(response.data.code == 200){

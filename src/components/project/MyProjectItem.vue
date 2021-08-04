@@ -40,7 +40,8 @@
                 this.$router.push({
                     path:'/index/milestone',
                     query:{
-                        projectid:this.project.projectid
+                        founder:this.project.founder,
+                        project:this.project.name
                     }
                 }) 
             },
@@ -48,7 +49,8 @@
                 this.$router.push({
                     path:'/index/requirement',
                     query:{
-                        projectid:this.project.projectid
+                        founder:this.project.founder,
+                        project:this.project.name
                     }
                 })
             },
@@ -56,7 +58,8 @@
                 this.$router.push({
                     path:'/index/projectinfo',
                     query:{
-                        projectid:this.project.projectid
+                        founder:this.project.founder,
+                        project:this.project.name
                     }
                 })
             },

@@ -13,6 +13,7 @@ import IconTableIndex from '../views/icontable/IconTableIndex.vue'
 import UpdateAvatar from '../views/navuser/UpdateAvatar.vue'
 import UpdatePassword from '../views/navuser/UpdatePassword.vue'
 import UserInfo from '../views/navuser/UserInfo.vue'
+import ProjectSecondInfo from '../views/project/projectinfo/SecondInfo.vue'
 
 Vue.use(VueRouter)
 
@@ -60,6 +61,14 @@ const routes = [
         path:'projectinfo',
         name:'ProjectInfo',
         component:ProjectInfo,
+        meta:{
+          requireAuth:true
+        }
+      },
+      {
+        path:'projectsecondinfo',
+        name:'ProjectSecondInfo',
+        component:ProjectSecondInfo,
         meta:{
           requireAuth:true
         }
