@@ -30,14 +30,6 @@ import qs from 'qs'
 
 
         methods: {
-            toMilestone(){
-                this.$router.push({
-                    path:'/index/milestone',
-                    query:{
-                        projectid:this.$route.query.projectid
-                    }
-                }) 
-            },
             deleteRequirement(){
                 var _this = this;
                 this.$confirm({
@@ -49,7 +41,7 @@ import qs from 'qs'
                     onOk() {
                         _this.axios.post('/index/requirement/delete',qs.stringify({
                             requirementid:_this.requirement.requirementid,
-                            projectid:_this.$route.query.projectid
+                            projectid:_this.requirement.projectid,
                         })).then(function(response){
                             console.log(response);
                             if(response.data.code == 200){

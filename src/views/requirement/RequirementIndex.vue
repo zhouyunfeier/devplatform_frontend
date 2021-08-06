@@ -7,7 +7,7 @@
         </el-tab-pane> 
         <el-tab-pane label="需求管理" name="second">
             <ItemHeader></ItemHeader>
-            <RequirementItem v-for="(requirement, index) in requirements" :requirement=requirement :key="index"
+            <RequirementItem v-for="(requirement, index) in requirements" :requirement="requirement" :key="index"
             @fatherMethod="showDrawer"
             @ChangeRequirements="ChangeRequirements"
             ></RequirementItem>
@@ -160,6 +160,7 @@ export default {
             project:this.$route.query.project,
             currentPage:1
         })).then(function(response){
+            console.log(response);
             if(response.data.code == 200){
                 if(response.data.msg == "操作成功"){
                     _this.requirements = response.data.data.list;

@@ -68,7 +68,8 @@ import qs from 'qs'
             return {
                 milestone:{
                     milestonename:'',
-                    projectid:'',
+                    projectname:this.$route.query.project,
+                    founder:this.$route.query.founder,
                     createDate:'',
                     endDate:'',
                     user:'',
@@ -108,15 +109,16 @@ import qs from 'qs'
         
         methods: {
             createMilestone(){
-                console.log(this.milestone.createDate);
+                console.log(this.milestone.founder);
                 var _this = this;
                 this.axios.post("/index/savemilestone",{
-                    projectid:this.$route.query.projectid,
-                    createDate:this.milestone.createDate,
-                    endDate:this.milestone.endDate,
-                    user:this.milestone.user,
-                    description:this.milestone.description,
-                    milestonename:this.milestone.milestonename
+                    projectfounder:_this.milestone.founder,
+                    projectname:_this.milestone.projectname,
+                    milestonename:_this.milestone.milestonename,
+                    description:_this.milestone.description,
+                    user:_this.milestone.user,
+                    createDate:_this.milestone.createDate,
+                    endDate:_this.milestone.endDate,
                 }).then(function(response) {
                     if(response.data.code == 200){
                         if(response.data.msg == "新建里程碑成功"){
@@ -138,8 +140,8 @@ import qs from 'qs'
         created() {
             var _this = this;
             this.axios.post("/index/getmembers",qs.stringify({
-                founder:this.$router.query.founder,
-                project:this.$router.query.project,
+                founder:this.$route.query.founder,
+                projectname:this.$route.query.project
             })).then(function(response){
                 console.log(response);
                 if(response.data.code == 200){

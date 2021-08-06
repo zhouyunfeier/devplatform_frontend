@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import { Button,Input,Aside,Menu,Container ,Main,MenuItem,FormItem,Form,Loading,Link,Tabs} from 'element-ui'
 import {TabPane,Divider,Row,Col,Dialog,Option,Select,DatePicker} from 'element-ui'
-import {Drawer,Empty,Dropdown,DropdownMenu,DropdownItem,Upload,Tooltip,Breadcrumb,BreadcrumbItem} from 'element-ui'
+import {Drawer,Empty,Dropdown,DropdownMenu,DropdownItem,Upload,Tooltip,Breadcrumb,BreadcrumbItem,Popover} from 'element-ui'
 
 Vue.use(Button)
 Vue.use(Input)
@@ -32,3 +32,4 @@ Vue.use(Upload)
 Vue.use(Tooltip)
 Vue.use(Breadcrumb)
 Vue.use(BreadcrumbItem)
+Vue.use(Popover)
