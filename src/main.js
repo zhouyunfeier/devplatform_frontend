@@ -9,10 +9,12 @@ import http from './api/http.js'
 import './plugins/element.js'
 import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
+import uploader from 'vue-simple-uploader'
 
 Vue.prototype.axios = http;
 Vue.config.productionTip = false
 Vue.use(Antd);
+Vue.use(uploader)
 Vue.use(mavonEditor);
 
 router.beforeEach((to, from, next) => {
