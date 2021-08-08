@@ -60,7 +60,7 @@ import qs from 'qs'
         methods: {
             handleClick(){
                 if(this.activeName == 'first'){
-                    return;
+                   return;
                 }
                 else if(this.activeName == 'second'){
                     this.$router.push({
@@ -89,7 +89,7 @@ import qs from 'qs'
                         }
                 })
                 }  
-            },
+            }
         },
 
         created() {
@@ -104,6 +104,7 @@ import qs from 'qs'
                     _this.dirs = response.data.data.dir_list;
                     _this.files = response.data.data.file_list;
                     _this.readme = response.data.data.readme;
+                    _this.project = response.data.data.project;
                     console.log(_this.readme);
                 }
             })

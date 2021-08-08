@@ -21,7 +21,7 @@
         </a-menu-item>
         <a-menu-item key="5">
           <a-icon type="cloud-o" />
-          <span class="nav-text">nav 5</span>
+          <span class="nav-text">Web IDE</span>
         </a-menu-item>
         <a-menu-item key="6">
           <a-icon type="appstore-o" />

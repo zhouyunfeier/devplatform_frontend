@@ -14,6 +14,7 @@ import UpdateAvatar from '../views/navuser/UpdateAvatar.vue'
 import UpdatePassword from '../views/navuser/UpdatePassword.vue'
 import UserInfo from '../views/navuser/UserInfo.vue'
 import ProjectSecondInfo from '../views/project/projectinfo/SecondInfo.vue'
+import BranchInfo from '../views/project/projectinfo/BranchInfo.vue'
 
 Vue.use(VueRouter)
 
@@ -69,6 +70,14 @@ const routes = [
         path:'projectsecondinfo',
         name:'ProjectSecondInfo',
         component:ProjectSecondInfo,
+        meta:{
+          requireAuth:true
+        }
+      },
+      {
+        path:'branchinfo',
+        name:'BranchInfo',
+        component:BranchInfo,
         meta:{
           requireAuth:true
         }

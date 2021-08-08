@@ -1,7 +1,19 @@
 <template>
     <div class="Info_header">
-        <el-button class="header_button">master</el-button>
-        <el-button class="header_button">分支</el-button>
+
+        <el-popover
+        placement="bottom"
+        width="150"
+        trigger="click">
+        <div class="pover_branch_title">分  支</div>
+        <div class="pover_branch_content">
+            <div class="branch_item" v-for="(branch, index) in branchList" :key="index" @click="selectBranch(index)">{{branch}}</div>
+        </div>
+        <el-button class="header_button" slot="reference">{{branch}}<i class="el-icon-caret-bottom"></i></el-button>
+        </el-popover>
+
+
+        <el-button class="header_button" style="margin-left:20px;" @click="toBranch">分支</el-button>
         <el-button class="header_button">标签</el-button>
         <el-popover
         placement="bottom"
@@ -60,6 +72,7 @@ export default {
             projectfounder:this.$route.query.founder,
             projectname:this.$route.query.project,
             branch:'main',
+            branchList:['main','second'],
             dialogFormVisible:false,
             options:{
                 target:'//localhost:8080/file/single',
@@ -82,6 +95,8 @@ export default {
             },
             dir:'',
             errorfilelist:[],    //上传失败信息列表
+
+
         }
     },
     
@@ -139,6 +154,19 @@ export default {
         },
         fileRemoved(file){
             
+        },
+        selectBranch(index){
+            this.branch = this.branchList[index];
+            alert("hello");
+        },
+        toBranch(){
+            this.$router.push({
+                path:'/index/branchinfo',
+                query:{
+                    founder:this.$route.query.founder,
+                    project:this.$route.query.project
+                }
+            })
         }
     },
 }
@@ -224,5 +252,23 @@ export default {
     overflow: auto;
     overflow-x: hidden;
     overflow-y: auto;
+}
+.pover_branch_title{
+    font-weight: 600;
+    text-align: center;
+    width: 100%;
+    padding: 5px 0;
+}
+.pover_branch_content{
+    text-align: center;
+}
+.branch_item{
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    font-size: 16px;
+}
+.branch_item:hover{
+    background: #eff7ff;
 }
 </style>
