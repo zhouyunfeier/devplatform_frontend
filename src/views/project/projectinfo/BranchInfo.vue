@@ -5,8 +5,26 @@
             <div class="info_center">
                 <div class="info_title"><i class="el-icon-folder"></i> zyf / <a @click="toProjectInfo">{{projectname}}</a></div>
                 <div class="info_function">
-                    全部分支   
-                    <el-button type="primary" class="info_create" size="small">新建分支</el-button>
+                    全部分支
+                    <el-popover
+                    placement="bottom"
+                    width="240"
+                    v-model="visible">
+                    <div class="popover_info">
+                        <div class="popver_title">起点</div>
+                        <el-select v-model="newbranchstart" slot="prepend" placeholder="请选择" style="margin-top:5px;">
+                        <el-option :label="mainbranch.branchname"  :key="mainbranch.branchname" :value="mainbranch.branchname"></el-option>
+                        <el-option :label="item.branchname" v-for="item in branches" :key="item.branchename" :value="item.branchname"></el-option>
+                        </el-select>
+
+                        <div class="popver_title" style="margin-top:5px;">新建分支</div>
+                        <el-input v-model="newbranchname" placeholder="" style="margin-top:5px;"></el-input>
+                        <div class="popver_title" style="margin-top:5px;">更新信息</div>
+                        <el-input v-model="newbranchmessage" placeholder="" style="margin-top:5px;"></el-input>
+                        <el-button type="primary" @click="createBranch" style="margin-top:5px;">新建</el-button>
+                    </div>
+                        <el-button type="primary" class="info_create" size="small" slot="reference">新建分支</el-button>
+                    </el-popover>
                 </div>
 
                 <div class="info_item_header">
@@ -15,14 +33,26 @@
                     <span>操作</span>
                 </div>
                 <div class="info_branch">
-                    <span>分支名</span>
-                    <span>更新信息</span>
+                    <span style="padding-left:8px;"><i class="el-icon-star-on"></i>{{mainbranch.branchname}}</span>
+                    <span>{{mainbranch.message}}</span>
+                    <span>
+                        <el-tooltip effect="dark" content="跳转" placement="top">
+                            <i class="el-icon-s-platform"></i>
+                        </el-tooltip>
+                        <!-- <el-tooltip class="item" effect="dark" content="删除" placement="top">
+                            <i class="el-icon-delete-solid" style="margin-left:10px"></i>
+                        </el-tooltip>     -->
+                    </span>
+                </div>
+                <div class="info_branch" v-for="(branch, index) in branches" :key="index">
+                    <span>{{branch.branchname}}</span>
+                    <span>{{branch.message}}</span>
                     <span>
                         <el-tooltip effect="dark" content="跳转" placement="top">
                             <i class="el-icon-s-platform"></i>
                         </el-tooltip>
                         <el-tooltip class="item" effect="dark" content="删除" placement="top">
-                             <i class="el-icon-delete-solid" style="margin-left:10px"></i>
+                            <i class="el-icon-delete-solid" style="margin-left:10px" v-show="branch.main == 0"></i>
                         </el-tooltip>    
                     </span>
                 </div>
@@ -47,12 +77,19 @@
 
 <script>
 import qs from 'qs'
+import { returnStatement } from '@babel/types';
     export default {
         data() {
             return {
                 activeName:'first',
                 projectname:this.$route.query.project,
                 branches:[],
+                mainbranch:"",
+                visible:false,
+                newbranchstart:'',
+                newbranchname:'',
+                newbranchmessage:'',
+
             }
         },
 
@@ -100,6 +137,34 @@ import qs from 'qs'
                             project:this.$route.query.project,
                         }
                 })
+            },
+
+            createBranch(){
+                if(this.newbranchstart == '' || this.newbranchstart == null){
+                    this.$message.info("请选择分支起点");
+                    return;
+                }
+                if(this.newbranchname == '' || this.newbranchname == null || this.newbranchstart == this.mainbranch.branchname){
+                    this.$message.info("请重新输入新分支名");
+                    this.newbranchname = "";
+                    return;
+                }
+                for(let i = 0 ; i < this.branches.length ; i++){
+                    if(this.branches[i].branchname == this.newbranchname){
+                        this.$message.info("该分支已经存在");
+                        this.newbranchname = "";
+                        return;
+                    }
+                }
+                this.axios.post("/branch/createbranch",qs.stringify({
+                    projectfounder:this.$route.query.founder,
+                    projectname:this.$route.query.project,
+                    branchname:this.newbranchname,
+                    branchstart:this.newbranchstart,
+                    branchmessage:this.newbranchmessage,
+                })).then(function(response){
+                    console.log(response);
+                })
             }
         },
 
@@ -109,7 +174,17 @@ import qs from 'qs'
                 projectfounder:this.$route.query.founder,
                 projectname:this.$route.query.project,
             })).then(function(response){
-                console.log(response);
+                if(response.data.code == 200){
+                    var branchList = response.data.data;
+                    for(var i = 0 ; i < branchList.length ; i++){
+                        if(branchList[i].main == 1){
+                            _this.mainbranch = branchList[i];
+                        }else{
+                            _this.branches.push(branchList[i]);
+                        }
+
+                    }
+                }
             })
 
         },
@@ -149,8 +224,8 @@ import qs from 'qs'
 }
 .info_create{
     float: right;
-    margin-right: 10px;
-    margin-top: -7px;
+    margin-right: 5%;
+    margin-top: -10px;
 }
 .info_item_header{
     width: 100%;
@@ -182,6 +257,9 @@ import qs from 'qs'
     text-align: left;
     line-height: 50px;
 }
+.info_branch:hover{
+    background: rgb(235, 235, 235);
+}
 .info_branch span{
     float: left;
 }
@@ -201,5 +279,10 @@ import qs from 'qs'
 }
 .info_branch span:nth-child(3){
     width: 10%;
+}
+.popver_title{
+    width: 100%;
+    font-weight: 600;
+    font-size: 14px;
 }
 </style>
